@@ -42,7 +42,7 @@ const createOrGetIndex = async (
   cache,
   getNode,
   server,
-  { fields, resolvers }
+  { config, fields, resolvers }
 ) => {
   const cacheKey = `${node.id}:index`
   const cached = await cache.get(cacheKey)
@@ -50,7 +50,7 @@ const createOrGetIndex = async (
     return cached
   }
 
-  const index = elasticlunr()
+  const index = elasticlunr(config)
   index.setRef(`id`)
   fields.forEach(field => index.addField(field))
 
